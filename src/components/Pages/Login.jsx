@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 
 import { useContext, useState } from 'react';
@@ -12,6 +12,7 @@ const Login = () => {
     const [success, setSucess] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -43,6 +44,7 @@ const Login = () => {
             .then(res => {
                 console.log(res.user)
                 setSucess(true);
+                navigate('/')
 
             })
             .catch(error => {
