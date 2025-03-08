@@ -1,10 +1,23 @@
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Authprovider/Authprovider";
+import './Navbar.css'
 
 const Header = () => {
     const { user, signOutUser } = useContext(AuthContext)
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    {
+        if (isDropdownOpen) {
+            console.log('Button Clicked')
+        }
+    }
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+
+
     const handleSignOut = () => {
         signOutUser();
     }
@@ -15,10 +28,12 @@ const Header = () => {
         {
             user && <>
                 <li><NavLink to="/order">Orders</NavLink></li>
-                <li><NavLink to="/profile">Profile</NavLink></li>
+
 
             </>
+
         }
+
 
         <li><NavLink to="/login">Login</NavLink></li>
         <li><NavLink to="/registration">Registration</NavLink></li>
@@ -47,9 +62,26 @@ const Header = () => {
             </div>
             <div className="navbar-end">
                 {
+                    user && <>
+                        <div className="profile-dropdown relative">
+                            <a className="me-6" onClick={toggleDropdown}><NavLink to="/profile">My Account</NavLink></a>
+                            {isDropdownOpen && (
+                                <div className="dropdown-menu">
+                                    <ul>
+                                        <li>Email : {user.email}</li>
+
+
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
+                    </>
+
+                }
+                {
                     user ?
                         <>
-                            <span className="mr-3">{user?.email}</span>
+
                             <a onClick={handleSignOut} className="btn">Sign Out</a>
                         </>
                         :

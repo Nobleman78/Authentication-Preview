@@ -1,0 +1,15 @@
+.user-dropdown-menu{
+    position: absolute;
+    top: 100%;
+    width: 180px;
+    height: auto;
+    left: -26px;
+    right: -48px;
+    background: #fff;
+    margin-top: 10px;
+    z-index: 100;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 20%);
+    padding: 15px;
+    border-radius: 5px;
+ 
+}
